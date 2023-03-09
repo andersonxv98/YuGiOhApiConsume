@@ -21,7 +21,8 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
     ControllerRequest req(engine.rootContext());
-    req.disparaRequest({},{});
+    //req.disparaRequest();
+
 
     const QUrl url(u"qrc:/YuGiOhApiConsume/main.qml"_qs);
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

@@ -8,8 +8,8 @@ class CardModel : public QObject
 public:
     CardModel();
 
-    QString getId() ;
-    void setId( QString newId);
+    int getId() ;
+    void setId(int newId);
 
     QString getName() ;
     void setName( QString newName);
@@ -17,14 +17,17 @@ public:
     QString getType() ;
     void setType( QString newType);
 
-    QString getAtk() ;
-    void setAtk( QString newAtk);
-
-    QString getDef() ;
-    void setDef( QString newDef);
-
     QString img() ;
     void setImg( QString newImg);
+    QString getFrame();
+    void setFrame(QString newFrame);
+
+    QString getDescription();
+    void setDescription(QString newDescription);
+
+    QString getArchetype();
+    void setArchetype( QString newArchetype);
+
 signals:
     void nameChanged(QString q);
     void imgChanged(QString q);
@@ -32,12 +35,13 @@ signals:
     void defChanged(QString q);
 
 private:
-    QString id;
+    int id;
     QString name;
     QString type;
-    QString atk;
-    QString def;
     QString img_;
+    QString frame;
+    QString description;
+    QString archetype;
 };
 
 #endif // CARDMODEL_H

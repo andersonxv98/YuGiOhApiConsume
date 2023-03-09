@@ -28,16 +28,16 @@ RestClient::~RestClient()
 void RestClient::makeRequest(QStringList param, QStringList valor)
 {
     qDebug() << "Inside makeRequest";
-    QString urlIni = "https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Toon Monster";
+    QString urlIni = "https://db.ygoprodeck.com/api/v7/cardinfo.php?";
 
- /*   QString parametros = "";
+   QString parametros = "";
     for(int i = 0; i < param.length(); i++)
     {
         parametros += param[i]+"="+valor[i]+"&";
     }
-*/
+    qDebug() << "Parametros : "  << parametros;
     QNetworkRequest request;
-    request.setUrl(QUrl(urlIni));
+    request.setUrl(QUrl(urlIni+parametros));
 
     //qDebug() << request.url().toString();
     //this->netReplay =netManager->get(request);

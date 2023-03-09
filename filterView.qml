@@ -4,26 +4,89 @@ Item {
     anchors.fill: parent
 
     Rectangle{
+        id: pageBody
         width: parent.width
         height: parent.height *0.8
         y: parent.height * 0.1
         color: "lightblue"
-    Column {
-        ComboBox {
-            width: 200
-            model: ["", "Dark", "Light", "Earth", "Water", "Fire", "Wind", "Divine" ]
+    Rectangle{
+        width: parent.width
+        height: parent.height
+        //color: "lightblue"
+        //border.color: "black"
+        radius: 5
+        Text{
+            id: labelSearch
+            text: "search: "
+            //font.pointSize:  24
         }
+        Rectangle {
+            anchors.left: labelSearch.right
+            width: parent.width
+            height: parent.height
+            radius: 5
+            border.color: "black"
+            TextField
+            {
+            id: input
+            placeholderText:   qsTr("Find by name or description")
+            text: "";
+            onTextChanged: {
+                controller.setDesc(input.text)
+            }
+            TapHandler{
+                onTapped: {
+                    selectTextOnSearch();
+                }
+            }
 
-
-        ComboBox {
-            width: 200
-            model: ["",'Skill Card', 'Spell Card', 'Trap Card', 'Normal Monster', 'Normal Tuner Monster', 'Effect Monster', 'Tuner Monster', 'Flip Monster', 'Flip Effect Monster', 'Flip Tuner Effect Monster', 'Spirit Monster', 'Union Effect Monster', 'Gemini Monster', 'Pendulum Effect Monster', 'Pendulum Normal Monster', 'Pendulum Tuner Effect Monster', 'Ritual Monster', 'Ritual Effect Monster', 'Toon Monster', 'Fusion Monster', 'Synchro Monster', 'Synchro Tuner Monster', 'Synchro Pendulum Effect Monster', 'XYZ Monster', 'XYZ Pendulum Effect Monster', 'Link Monster', 'Pendulum Flip Effect Monster', 'Pendulum Effect Fusion Monster' , 'Token' ]
+            }
+            TapHandler{
+                onTapped: {
+                    selectTextOnSearch();
+                }
+            }
         }
-
-
-        ComboBox {
-            width: 200
-            model: ["",'continuous', 'zombie', 'fiend', 'normal', 'quick-play', 'rock', 'warrior', 'winged beast', 'spellcaster', 'beast', 'fairy', 'equip', 'field', 'fish', 'beast-warrior', 'thunder', 'machine', 'sea serpent', 'aqua', 'plant', 'dragon', 'reptile', 'counter', 'psychic', 'insect', 'pyro', 'dinosaur', 'wyrm', 'cyberse', 'ritual', 'divine-beast', 'creator-god', 'cyverse', 'mai', 'pegasus', 'ishizu', 'joey', 'kaiba', 'yugi'] }
     }
+    Rectangle{//Monster section
+        id: monsterfilterBody
+        width: parent.width
+        height: parent.height *0.8
+        y: parent.height * 0.1
+        color: "gray"
+        radius: 5
+        border.width: 5
+        border.color: "black"
+    }
+    Rectangle{//Spell/Trap section
+        id: spellfilterBody
+        width: parent.width
+        height: parent.height *0.2
+        y: monsterfilterBody.height
+        color: "lightgreen"
+        radius: 5
+        border.width: 5
+        border.color: "black"
+    }
+
+
+
+
+    }
+
+
+
+
+    function clearTextOnSearch(){
+        input.text= ""
+        return;
+    }
+    function selectTextOnSearch(){
+        input.selectAll()
+    }
+
+    Connections{
+        target: controller
+
     }
 }

@@ -1,11 +1,13 @@
 QT += quick\
       network\
-      widgets
+      widgets\
+      svg
 
 SOURCES += \
         cardmodel.cpp \
         controllerrequest.cpp \
         main.cpp \
+        monster.cpp \
         restclient.cpp
 
 resources.files = main.qml 
@@ -14,7 +16,8 @@ RESOURCES += resources\
             CardView.qml\
             filterView.qml\
             headerView.qml\
-            footerView.qml
+            footerView.qml\
+            spinner.svg
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -30,6 +33,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     cardmodel.h \
     controllerrequest.h \
+    monster.h \
     restclient.h
 
 android: include(android_openssl-master/openssl.pri)
@@ -38,4 +42,5 @@ DISTFILES += \
     CardView.qml \
     filterView.qml \
     footerView.qml \
-    headerView.qml
+    headerView.qml \
+    spinner.svg

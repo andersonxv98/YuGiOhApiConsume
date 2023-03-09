@@ -5,12 +5,12 @@ CardModel::CardModel()
 
 }
 
-QString CardModel::getId()
+int CardModel::getId()
 {
     return id;
 }
 
-void CardModel::setId(QString newId)
+void CardModel::setId(int newId)
 {
     id = newId;
 }
@@ -36,27 +36,6 @@ void CardModel::setType( QString newType)
     type = newType;
 }
 
-QString CardModel::getAtk()
-{
-    return atk;
-}
-
-void CardModel::setAtk( QString newAtk)
-{
-    atk = newAtk;
-    emit atkChanged(atk);
-}
-
-QString CardModel::getDef()
-{
-    return def;
-}
-
-void CardModel::setDef( QString newDef)
-{
-    def = newDef;
-    emit defChanged(def);
-}
 
 QString CardModel::img()
 {
@@ -68,4 +47,34 @@ void CardModel::setImg( QString newImg)
 {
     img_ = newImg;
     emit imgChanged(img_);
+}
+
+QString CardModel::getFrame()
+{
+    return frame;
+}
+
+void CardModel::setFrame(QString newFrame)
+{
+    frame = newFrame;
+}
+
+QString CardModel::getDescription()
+{
+    return description;
+}
+
+void CardModel::setDescription(QString newDescription)
+{
+    description = newDescription;
+}
+
+QString CardModel::getArchetype()
+{
+    return archetype;
+}
+
+void CardModel::setArchetype(QString newArchetype)
+{
+    archetype = newArchetype;
 }
