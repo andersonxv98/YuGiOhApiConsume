@@ -29,6 +29,7 @@ public:
       signals:
            // Sinal que indica que os dados já estão prontos para serem lidos
            void dataReadyRead(QByteArray);
+           void error();
 };
 
 #endif // RESTCLIENT_H

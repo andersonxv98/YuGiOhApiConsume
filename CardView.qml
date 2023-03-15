@@ -18,14 +18,24 @@ Item {
 
 
 
-        /*Rectangle {
-            width: 100; height: 100; color: "green"
-            RotationAnimation on rotation {
-                loops: Animation.Infinite
-                from: 0
-                to: 360
+        TextArea {
+            id: erroMsg
+            text: qsTr("No cards match your search!\n please check that there are no filter conflicts")
+            font.pointSize: 14
+
+            visible: false
+
+
+
+        }
+        Connections{
+            target: rq
+
+            function onError(){
+                erroMsg.visible = true;
             }
-        }*/
+        }
+
         SwipeView {
             id: view
 
@@ -170,7 +180,7 @@ Item {
                         Text{
                             id: trace
                             x: parent.width * 0.05
-                            text: "Race: "
+                            text: "Type: "
                         }
                         Text{
                             id: cardrace
@@ -290,6 +300,10 @@ Item {
 
         function onRetorno(){
             cardModel.clear();
+        }
+
+        function onHideErrorMsg(){
+            erroMsg.visible = false;
         }
     }
 }

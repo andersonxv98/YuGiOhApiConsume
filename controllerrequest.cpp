@@ -13,12 +13,38 @@ ControllerRequest::ControllerRequest(QQmlContext * context)
     this->context->setContextProperty("controller", this);
     RestClient * rc = new RestClient(this);
     this->cliente = rc;
+    this->context->setContextProperty("rq", this->cliente);
     connect(cliente,&RestClient::dataReadyRead,this,&ControllerRequest::setDataOnList);
 }
 
 void ControllerRequest::disparaRequest()
 {
     this->continuar = true;
+    if(this->ATK != ""){
+        this->params.append("atk");
+        this->values.append(this->ATK_opt+this->ATK);
+    }
+    if(this->DEF != ""){
+        this->params.append("def");
+        this->values.append(this->DEF_opt+this->DEF);
+    }
+    if(this->type != ""){
+        this->params.append("type");
+        this->values.append(this->type);
+    }
+
+    if(this->level != ""){
+        this->params.append("level");
+        this->values.append(this->level_opt+this->level);
+    }
+    if(this->race != ""){
+        this->params.append("race");
+        this->values.append(this->race);
+    }
+    if(this->attribute != ""){
+        this->params.append("attribute");
+        this->values.append(this->attribute);
+    }
     if(this->lang != ""){
         this->params.append("language");
         this->values.append(this->lang);
@@ -37,7 +63,7 @@ void ControllerRequest::disparaRequest()
 
 void ControllerRequest::setLang(QString l)
 {
-    qDebug() << "Inside setLang Valor l: " << l;
+    //qDebug() << "Inside setLang Valor l: " << l;
     this->lang = l;
     return;
 }
@@ -47,6 +73,60 @@ void ControllerRequest::setDesc(QString d)
     this->desc = d;
     return;
 
+}
+
+void ControllerRequest::setRace(QString r)
+{
+    this->race = r;
+    return;
+}
+
+void ControllerRequest::setAttribute(QString a)
+{
+    this->attribute = a;
+    return;
+}
+
+void ControllerRequest::setLevel(QString l)
+{
+    this->level = l;
+    return;
+}
+
+void ControllerRequest::setLevelOpt(QString l)
+{
+this->level_opt = l;
+    return;
+}
+
+void ControllerRequest::setFrameType(QString f)
+{
+this->type = f;
+    return;
+}
+
+void ControllerRequest::setATK(QString a)
+{
+    this->ATK = a;
+    return;
+}
+
+void ControllerRequest::setDEF(QString d)
+{
+    this->DEF = d;
+    return;
+}
+
+void ControllerRequest::setDEFOpt(QString o)
+{
+    this->DEF_opt = o;
+    return;
+}
+
+void ControllerRequest::setATKOpt(QString o)
+{
+    this->ATK_opt = o;
+    return;
 }
 
 void ControllerRequest::retornar()
@@ -60,8 +140,7 @@ void ControllerRequest::retornar()
 
 void ControllerRequest::setDataOnList(QByteArray b)
 {
-    qDebug() << "inside setDataONLIst" ;
-    //qDebug() << b;
+   emit hideErrorMsg();
    QJsonDocument itemDoc = QJsonDocument::fromJson(b);
     QJsonObject rootObject = itemDoc.object();
 
@@ -112,7 +191,7 @@ void ControllerRequest::setDataOnList(QByteArray b)
         //QStringList card_l = {id_mg, ulr_mg};
         //id, name, level,atk, def, desc, type, atribute, race, source
         emit cardAppended(carta->getId(), carta->getName(),carta->getLevel(),carta->getAtk(), carta->getDef(), carta->getDescription(), carta->getType(), carta->getAttribute(), carta->getMonstertype(),ulr_mg);
-        QTime dieTime= QTime::currentTime().addMSecs(50);
+        QTime dieTime= QTime::currentTime().addMSecs(1);
             while (QTime::currentTime() < dieTime)
                 QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
     }

@@ -1,5 +1,8 @@
 #include "restclient.h"
 
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonValue>
 #include <QNetworkReply>
 #include <QNetworkReply>
 
@@ -57,11 +60,28 @@ void RestClient::readReply(QNetworkReply *reply)
     //Lê todos os retornos do reply e armazena no array de bytes
     myData = reply->readAll();
     qDebug() << myData;
+
+    QJsonDocument itemDoc = QJsonDocument::fromJson(myData);
+    QJsonObject rootObject = itemDoc.object();
+
+
+         QString response = rootObject.value("error").toString();
+         qDebug() << "RESPONSE: " <<response;
+        if(!response.contains("No card matching your query was found in the database")){
+          //qDebug()<< "VEIO COISA";
+           emit dataReadyRead(myData);
+        }
+        else{
+           emit error();
+        }
+
+
+
     //qDebug() << reply->isFinished();
     //qDebug() << reply->error();
 
     //emite um sinal indicando que os dados já foram lidos e estão prontos para serem usados
-   emit dataReadyRead(myData);
+
 
     return;
 }
