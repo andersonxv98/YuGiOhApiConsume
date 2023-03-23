@@ -3,20 +3,67 @@ import QtQuick.Controls
 Item {
     anchors.fill: parent
     Rectangle{
+        id: header_
         width: parent.width
         height: parent.height * 0.10
-        color: "Orange"
+        color: "#2E3033"
+        radius: 5
         Text {
             id: labelLanguage
             text: qsTr("Language: ")
-            //font.pointSize: 24
-
+            color: "#E1EBFA"
+            font.pointSize: header_.height * 0.27
+            x: parent.width * 0.03
         }
         ComboBox {
-            x: labelLanguage.width
-            width: parent.width * 0.4
+            id: cbHeader
+            x: labelLanguage.width + labelLanguage.x
+            width: header_.width - (labelLanguage.width + (labelLanguage.x * 2))
             height: labelLanguage.height
+            font.pointSize: header_.height * 0.2
+            //color: "black"
             model: ['English',  'Portuguese' ,'French', 'German', 'Italian'  ]
+            background: Rectangle {
+                   color:"#5b5f6a"
+                   radius: 5
+               }
+            contentItem: Text {
+                  leftPadding: 0
+                  //rightPadding: cbHeader.indicator.width + control.spacing
+
+                  text: cbHeader.displayText
+                  font: cbHeader.font
+                  color: cbHeader.pressed ? "#e1f8fa" : "#E1EBFA"
+                  verticalAlignment: Text.AlignVCenter
+                  elide: Text.ElideRight
+              }
+
+
+
+              /*popup: Popup {
+                  y: cbHeader.height - 1
+                  width: cbHeader.width
+                  implicitHeight: contentItem.implicitHeight
+                  padding: 1
+
+                  contentItem: ListView {
+                      clip: true
+                      implicitHeight: contentHeight
+                      model: cbHeader.popup.visible ? cbHeader.model : null
+                      currentIndex: cbHeader.highlightedIndex
+
+                      ScrollIndicator.vertical: ScrollIndicator { }
+                  }
+
+                  background: Rectangle {
+                      border.color: "white"
+                      radius: 2
+                  }
+              }*/
+                //Material.accent: "green"
+                //Material.foreground: "blue"
+
+
             onCurrentIndexChanged: {
                  var lang = "";
                 switch (currentIndex) {
@@ -43,7 +90,5 @@ Item {
 
     Connections{
         target: controller
-
-
     }
 }

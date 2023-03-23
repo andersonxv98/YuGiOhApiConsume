@@ -15,9 +15,9 @@ import QtQuick
                 height:  parent.height * 0.8
                 x: parent.width* 0.01
                 y:   (parent.height - height) / 2
-                color: "blue"
+                color: "#5E626E"
                 radius: width * 0.1
-                border.color: "black"
+
                 visible: false
 
                 Text {
@@ -31,7 +31,7 @@ import QtQuick
                 }
                 TapHandler{
                     onTapped: {
-                        console.log("Tapped RETURN BUTTON")
+
                         controller.retornar();
                         alternVisibilityBtns();
                     }
@@ -44,9 +44,9 @@ import QtQuick
                 height:  parent.height * 0.8
                 x: (parent.width - width) /2
                 y:   (parent.height - height) / 2
-                color: "blue"
+                color: "#5E626E"
                 radius: width * 0.1
-                border.color: "black"
+
                 visible: true
 
                 Text {
@@ -60,7 +60,7 @@ import QtQuick
                 }
                 TapHandler{
                     onTapped: {
-                        console.log("Tapped SEARCH BUTTON")
+
                         controller.disparaRequest();
                         alternVisibilityBtns();
                     }

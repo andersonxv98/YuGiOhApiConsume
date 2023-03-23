@@ -1,11 +1,20 @@
 import QtQuick
 
 Window {
+    id: mainApp
     width: 480
     height: 640
     visible: true
-    title: qsTr("Hello World")
+    color: "black"
+    title: qsTr("My Yu Gi View")
 
+    Rectangle{
+        //anchors.fill: parent
+        anchors.centerIn:  parent
+        width: parent.width * 0.97
+        height: parent.height * 0.97
+        radius: 5
+        color: "transparent"
     Loader{
         id: headerView
         source:  "qrc:/headerView.qml"
@@ -27,7 +36,7 @@ Window {
         source: "qrc:/footerView.qml"
         anchors.fill: parent
     }
-
+    }
 
     Connections{
         target: controller
@@ -44,4 +53,7 @@ Window {
             filterView.visible = true;
         }
     }
+
+
+
 }

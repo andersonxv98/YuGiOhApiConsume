@@ -1,7 +1,6 @@
 #ifndef CONTROLLERREQUEST_H
 #define CONTROLLERREQUEST_H
 
-#include "cardmodel.h"
 #include "qqmlcontext.h"
 #include <QObject>
 #include <QPointer>
@@ -35,10 +34,12 @@ public slots:
            void doSearch();
            void retorno();
            void hideErrorMsg();
+           void endSearch();
+           void startSearch();
 private:
        RestClient *cliente;
         QQmlContext  * context;
-        QList<CardModel *>  m= {};
+        //QList<CardModel *>  m= {};
         QString lang;
         QString desc;
         QString race;
